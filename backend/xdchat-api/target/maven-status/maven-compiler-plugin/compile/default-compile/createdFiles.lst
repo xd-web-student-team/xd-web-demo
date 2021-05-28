@@ -1,0 +1,10 @@
+xd\xdchat\api\entity\RespBean.class
+xd\xdchat\api\entity\Admin.class
+xd\xdchat\api\entity\RespPageBean.class
+xd\xdchat\api\entity\User.class
+xd\xdchat\api\entity\UserState.class
+xd\xdchat\api\utils\UserUtil.class
+xd\xdchat\api\utils\JsonUtil.class
+xd\xdchat\api\utils\ImgUtil.class
+xd\xdchat\api\utils\FastDFSUtil.class
+xd\xdchat\api\entity\Feedback.class
