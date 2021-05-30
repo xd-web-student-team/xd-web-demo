@@ -82,7 +82,7 @@ export default {
                   "admin",
                   JSON.stringify(resp.obj)
                 );
-                // this.$router.replace("/home");
+                this.$router.replace("/home");
               }
             }
           );
