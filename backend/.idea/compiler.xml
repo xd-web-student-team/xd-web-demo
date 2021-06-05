@@ -13,14 +13,12 @@
     <bytecodeTargetLevel>
       <module name="backend" target="1.8" />
       <module name="xdchat-api" target="1.8" />
-      <module name="xdchat-mailserver" target="1.8" />
       <module name="xdchat-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="xdchat-api" options="-parameters" />
-      <module name="xdchat-mailserver" options="-parameters" />
       <module name="xdchat-web" options="-parameters" />
     </option>
   </component>
