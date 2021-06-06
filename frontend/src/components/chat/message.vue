@@ -30,7 +30,7 @@
       </ul>
     </div> -->
     <!-- 群聊 -->
-    <div v-show="currentList == '群聊' && currentSessionGroup != null">
+    <div v-show="currentList == '群聊' && currentSessionGroup != null
       <div v-if="sessions['群聊'][currentSessionGroup.id] == null" style="text-align:center; padding: 20% 0; ">
         <img :src="require('../../assets/image/目的地.png')" style="width:120px;"></div>
       <div v-else>
