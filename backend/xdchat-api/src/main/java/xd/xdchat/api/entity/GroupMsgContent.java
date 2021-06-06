@@ -4,65 +4,68 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.converters.string.StringImageConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import xd.xdchat.api.converter.MyContentConverter;
-import xd.xdchat.api.data.GroupMsgContentData;
 
+import java.util.List;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
-/**
- * (GroupMsgContent)实体类
- *
- * @author LSK
- * @date 2021/5/30 - 16:57
- */
+//(GroupMsgContent)实体类
 @ColumnWidth(25)
 @ContentRowHeight(40)
 public class GroupMsgContent implements Serializable {
     private static final long serialVersionUID = 980328865610261046L;
     /**
-    * 消息内容编号
-    */
+     * 消息内容编号
+     */
     @ExcelProperty("消息内容编号")
     private Integer id;
     /**
-    * 发送者的编号
-    */
+     * 发送者的编号
+     */
     @ExcelProperty("发送者的编号")
     private Integer fromId;
     /**
-    * 发送者的昵称
-    */
+     * 发送者的昵称
+     */
     @ExcelProperty("昵称")
     private String fromName;
     /**
-    * 发送者的头像
-    */
+     * 发送者的头像
+     */
     @ExcelIgnore
     private String fromProfile;
     /**
-    * 消息发送时间
-    */
+     * 消息发送时间
+     */
     @ExcelProperty("发送时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
     /**
-    * 消息内容
-    */
+     * 消息内容
+     */
     @ExcelProperty(value = "内容",converter = MyContentConverter.class)
     @ColumnWidth(50)
     private String content;
     /**
-    * 消息类型编号
-    */
+     * 消息类型编号
+     */
     @ExcelIgnore
     private Integer messageTypeId;
 
+    @ExcelProperty("群号")
+    private Integer idGroup;
+
+    public Integer getIdGroup() {
+        return idGroup;
+    }
+
+    public void setIdGroup(Integer idGroup) {
+        this.idGroup = idGroup;
+    }
 
     public Integer getId() {
         return id;
@@ -130,30 +133,7 @@ public class GroupMsgContent implements Serializable {
                 ", createTime=" + createTime +
                 ", content='" + content + '\'' +
                 ", messageTypeId=" + messageTypeId +
+                ", idGroup=" + idGroup +
                 '}';
-    }
-
-    /**
-     * 将数据库实体转化为Excel的数据实体
-     * @param groupMsgContent
-     * @return
-     */
-    public static GroupMsgContentData convertEntityToData(GroupMsgContent groupMsgContent) throws MalformedURLException {
-        GroupMsgContentData groupMsgContentData = new GroupMsgContentData();
-        groupMsgContentData.setFromId(groupMsgContent.getFromId());
-        groupMsgContentData.setId(groupMsgContent.getId());
-        groupMsgContentData.setFromName(groupMsgContent.getFromName());
-        groupMsgContentData.setCreateTime(groupMsgContent.getCreateTime());
-        //转化为URL以Excel导出图片
-        groupMsgContentData.setFromProfile(new URL(groupMsgContent.getFromProfile()));
-        //根据消息类型设置内容
-        if (groupMsgContent.getMessageTypeId()==1){
-            groupMsgContentData.setTextContent(groupMsgContent.getContent());
-        }
-        if (groupMsgContent.getMessageTypeId()==2){
-            groupMsgContentData.setImageContent(new URL(groupMsgContent.getContent()));
-        }
-
-        return  groupMsgContentData;
     }
 }

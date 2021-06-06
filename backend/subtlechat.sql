@@ -1550,3 +1550,55 @@ INSERT INTO `user_state`
 VALUES ('2', '离线');
 INSERT INTO `user_state`
 VALUES ('3', '已注销');
+
+
+-- ----------------------------
+-- Table structure for group_contained_users
+-- ----------------------------
+CREATE TABLE `group_contained_users` (
+  `id_group` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_group`, `id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of group_contained_users
+-- ----------------------------
+INSERT INTO `group_contained_users` VALUES ('1', '1');
+INSERT INTO `group_contained_users` VALUES ('1', '2');
+INSERT INTO `group_contained_users` VALUES ('1', '3');
+INSERT INTO `group_contained_users` VALUES ('1', '4');
+INSERT INTO `group_contained_users` VALUES ('1', '5');
+INSERT INTO `group_contained_users` VALUES ('1', '6');
+INSERT INTO `group_contained_users` VALUES ('1', '7');
+INSERT INTO `group_contained_users` VALUES ('1', '8');
+INSERT INTO `group_contained_users` VALUES ('1', '9');
+INSERT INTO `group_contained_users` VALUES ('1', '10');
+INSERT INTO `group_contained_users` VALUES ('1', '11');
+INSERT INTO `group_contained_users` VALUES ('1', '12');
+INSERT INTO `group_contained_users` VALUES ('1', '13');
+INSERT INTO `group_contained_users` VALUES ('1', '14');
+INSERT INTO `group_contained_users` VALUES ('1', '15');
+INSERT INTO `group_contained_users` VALUES ('1', '16');
+INSERT INTO `group_contained_users` VALUES ('1', '17');
+INSERT INTO `group_contained_users` VALUES ('1', '18');
+INSERT INTO `group_contained_users` VALUES ('1', '19');
+INSERT INTO `group_contained_users` VALUES ('1', '20');
+INSERT INTO `group_contained_users` VALUES ('1', '21');
+INSERT INTO `group_contained_users` VALUES ('1', '22');
+
+-- ----------------------------
+-- Table structure for group_name
+-- ----------------------------
+CREATE TABLE `group_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(45) NOT NULL,
+  `id_group_holder` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of group_name
+-- ----------------------------
+INSERT INTO `group_name` VALUES ('1', '西电人总群','1');
+

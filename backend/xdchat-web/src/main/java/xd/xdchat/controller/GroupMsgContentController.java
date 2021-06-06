@@ -1,33 +1,18 @@
 package xd.xdchat.controller;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.JSON;
-import xd.xdchat.api.data.GroupMsgContentData;
-import xd.xdchat.api.entity.GroupMsgContent;
-import xd.xdchat.api.entity.RespBean;
-import xd.xdchat.api.entity.RespPageBean;
-import xd.xdchat.dao.GroupMsgContentDao;
-import xd.xdchat.service.GroupMsgContentService;
 import org.springframework.web.bind.annotation.*;
+import xd.xdchat.api.entity.*;
+import xd.xdchat.service.GroupMsgContentService;
+
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * (GroupMsgContent)表控制层
  *
- * @author LSK
- * @date 2021/5/30 - 16:57
  */
 @RestController
 @RequestMapping("/groupMsgContent")
@@ -39,8 +24,13 @@ public class GroupMsgContentController {
     private GroupMsgContentService groupMsgContentService;
 
     @GetMapping("/")
-    private List<GroupMsgContent> getAllGroupMsgContent(){
+    private Map<Integer,GroupMsg> getAllGroupMsgContent(){
         return groupMsgContentService.queryAllByLimit(null,null);
+    }
+
+    @GetMapping("/queryByIdGroup")
+    private GroupMsg getGroupMsgContentByIdGroup(@RequestParam("idGroup")Integer idGroup){
+        return groupMsgContentService.getGroupMsgContentByIdGroup(idGroup);
     }
 
     /**
@@ -95,11 +85,4 @@ public class GroupMsgContentController {
         }
     }
 
-
-    @GetMapping("/download")
-    public void download(HttpServletResponse response) throws IOException {
-
-        groupMsgContentService.handleDownload(response);
-
-       }
 }
