@@ -1307,7 +1307,7 @@ VALUES ('3', '文件');
 -- Table structure for user_info
 -- ----------------------------
 DROP TABLE IF EXISTS `user_info`;
-CREATE TABLE `user` (
+CREATE TABLE `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL COMMENT '登录账号',
   `nickname` varchar(20) NOT NULL COMMENT '昵称',
