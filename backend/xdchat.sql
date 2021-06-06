@@ -4,7 +4,7 @@
  Source Server         : local
  Source Server Version : 50718
  Source Host           : localhost:3306
- Source Database       : subtlechat
+ Source Database       : xdchat
  
  Target Server Type    : MYSQL
  Target Server Version : 50718
@@ -175,6 +175,7 @@ CREATE TABLE `group_msg_content` (
   `create_time` datetime DEFAULT NULL COMMENT '消息发送时间',
   `content` text COMMENT '消息内容',
   `message_type_id` int(11) DEFAULT NULL COMMENT '消息类型编号',
+  `id_group` int(11) DEFAULT NULL COMMENT '群id',
   PRIMARY KEY (`id`),
   KEY `group_ibfk_1` (`from_id`),
   KEY `group_ibfk_2` (`message_type_id`),
@@ -192,6 +193,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 03:02:28',
     '大家好',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -202,6 +204,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 03:04:24',
     '大家好！',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -212,6 +215,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 04:51:56',
     'hello',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -222,6 +226,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 12:55:32',
     '88',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -232,6 +237,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 13:28:44',
     '321',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -242,6 +248,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 22:05:00',
     '三刀流',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -252,6 +259,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 22:17:10',
     '其他人呢？',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -262,6 +270,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 22:46:09',
     '不知道',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -272,6 +281,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 22:47:35',
     '???',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -282,6 +292,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 22:47:59',
     '？',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -292,6 +303,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:02:46',
     '111',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -302,6 +314,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 23:03:20',
     '111',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -312,6 +325,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 23:03:33',
     '111',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -322,6 +336,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 23:07:52',
     '2',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -332,6 +347,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:08:36',
     '33',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -342,6 +358,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:14:51',
     '111',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -352,6 +369,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:18:18',
     'awsl',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -362,6 +380,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:36:23',
     'wa',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -372,6 +391,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 23:37:04',
     'waaaa\n',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -382,6 +402,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-05-31 23:37:20',
     'lallala',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -392,6 +413,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-05-31 23:37:29',
     '666',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -402,6 +424,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-01 14:29:52',
     '55555',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -412,6 +435,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-01 14:30:10',
     '444444',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -422,6 +446,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 14:30:23',
     '22222',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -432,6 +457,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-01 14:36:53',
     '666',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -442,6 +468,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 14:37:01',
     '啦啦啦啦',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -452,6 +479,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-01 14:37:30',
     'eee',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -462,6 +490,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 14:47:31',
     '啊啊啊',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -472,6 +501,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 16:21:07',
     '拉拉',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -482,6 +512,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 16:22:13',
     '啦啦啦啦',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -492,6 +523,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-01 16:52:52',
     'aaaaa',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -502,6 +534,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-02 10:55:49',
     '6.19',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -512,6 +545,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-02 10:56:29',
     '6.18',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -522,6 +556,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-02 11:00:40',
     '6.17',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -532,6 +567,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-02 11:01:11',
     '6.16',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -542,6 +578,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-02 17:46:49',
     '我要砍死你',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -552,6 +589,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-02 17:47:12',
     '瓦力瓦力',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -562,6 +600,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7vNk6AI5ncAAZrF3kx8E4062.jpg',
     '2021-06-03 21:57:51',
     '666',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -572,6 +611,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-03 22:00:33',
     '!!!',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -582,6 +622,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-03 22:03:12',
     '!!!!!!!!!!!!!',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -592,7 +633,8 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-03 22:55:36',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7vdOmARAv9AAZhj13MNZc018.jpg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -602,6 +644,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7vNk6AI5ncAAZrF3kx8E4062.jpg',
     '2021-06-04 10:43:06',
     'ssss',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -612,6 +655,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-04 10:44:50',
     '123',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -622,6 +666,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-04 10:47:50',
     '我胡汉三又回来了',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -632,7 +677,8 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-04 10:48:40',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHAmAIRtPAA4Q9d1YCi8462.jpg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -642,6 +688,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-04 10:50:50',
     '88',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -652,6 +699,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHOaAVoqUAAEnxFEdf9A80.jpeg',
     '2021-06-04 10:53:05',
     '...',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -662,6 +710,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wPomAWB44AACPzYoUMyE376.jpg',
     '2021-06-04 13:18:16',
     'lalalal',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -672,6 +721,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 00:25:37',
     '&#129315;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -682,6 +732,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 00:25:52',
     'nihao',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -692,6 +743,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 00:26:01',
     '大家好',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -702,6 +754,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 11:28:41',
     '&#128535;太好了！&#129310;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -712,6 +765,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 11:43:34',
     '&#9784;️',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -722,6 +776,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 11:43:54',
     '&#128585;&#128585;&#128585;&#128139;&#128140;&#128152;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -732,6 +787,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-05 11:48:31',
     '&#128169;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -742,6 +798,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHOaAVoqUAAEnxFEdf9A80.jpeg',
     '2021-06-06 12:30:52',
     '&#128544;滚',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -752,7 +809,8 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHOaAVoqUAAEnxFEdf9A80.jpeg',
     '2021-06-06 12:31:41',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78Ea6AWq5hAAPr-MGWs8o676.jpg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -762,6 +820,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHOaAVoqUAAEnxFEdf9A80.jpeg',
     '2021-06-06 14:58:05',
     '有人吗？\n',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -772,7 +831,8 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV7wHOaAVoqUAAEnxFEdf9A80.jpeg',
     '2021-06-06 15:19:09',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78OO-AUwQdAA4Q9d1YCi8766.jpg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -782,6 +842,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-06 15:20:28',
     '222',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -792,7 +853,8 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-06 15:32:15',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78PAGAY-yKAA14IFomF20918.gif',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -802,7 +864,8 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-06 15:32:35',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78PBSAJK0CAAeXVP-WpTQ029.gif',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -812,6 +875,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78RRGATCo6AA4Q9d1YCi8203.jpg',
     '2021-06-06 16:11:30',
     '?',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -822,6 +886,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV78qMyAeQV2AA4eYWQZmQA183.jpg',
     '2021-06-06 23:16:57',
     '大家好',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -832,6 +897,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-06 23:17:21',
     '你好&#128578;哈',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -842,6 +908,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV79ZYaAcPRzAAEnxFEdf9A79.jpeg',
     '2021-06-07 12:42:05',
     '大家好啊',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -852,6 +919,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-07 12:42:30',
     '你好啊&#128556;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -862,6 +930,7 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-07 12:42:46',
     '欢迎\n',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -872,6 +941,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-07 19:43:54',
     '有人吗？',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -882,6 +952,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-08 21:48:20',
     '??',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -892,6 +963,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-08 21:48:35',
     '&#128590;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -902,7 +974,8 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-08 21:48:48',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV8EfUGAOAkwAABXIkocmK4137.gif',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -912,6 +985,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 13:07:38',
     '123\n',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -922,6 +996,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 13:10:24',
     '&#128558;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -932,7 +1007,8 @@ VALUES (
     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1449253785,508542562&fm=26&gp=0.jpg',
     '2021-06-09 13:10:46',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV91ZNWAH5_UAAAr1YNW1TU52.jpeg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -942,6 +1018,7 @@ VALUES (
     'http://39.108.169.57/group1/M00/00/00/J2ypOV91Z_uADljOAAANuXp4Wt8245.jpg',
     '2021-06-09 13:24:46',
     'wow\n',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -952,6 +1029,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 18:09:24',
     '&#128530;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -962,7 +1040,8 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 18:09:31',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV91qtuAdB0EAAARihKoLCw540.jpg',
-    '2'
+    '2',
+    '1'
   );
 INSERT INTO `group_msg_content`
 VALUES (
@@ -972,6 +1051,7 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 18:29:19',
     '&#129316;',
+    '1',
     '1'
   );
 INSERT INTO `group_msg_content`
@@ -982,7 +1062,8 @@ VALUES (
     'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1405813947,3985685597&fm=26&gp=0.jpg',
     '2021-06-09 18:29:34',
     'http://39.108.169.57/group1/M00/00/00/J2ypOV91r42AbuiYAAARihKoLCw482.jpg',
-    '2'
+    '2',
+    '1'
   );
 -- ----------------------------
 -- Table structure for mail_send_log
