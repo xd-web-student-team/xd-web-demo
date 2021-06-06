@@ -179,7 +179,7 @@ CREATE TABLE `group_msg_content` (
   PRIMARY KEY (`id`),
   KEY `group_ibfk_1` (`from_id`),
   KEY `group_ibfk_2` (`message_type_id`),
-  CONSTRAINT `group_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `group_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `user_info` (`id`),
   CONSTRAINT `group_ibfk_2` FOREIGN KEY (`message_type_id`) REFERENCES `message_type` (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 99 DEFAULT CHARSET = utf8;
 -- ----------------------------
