@@ -1,24 +1,21 @@
 package xd.xdchat.service;
 
+import xd.xdchat.api.entity.Group;
+import xd.xdchat.api.entity.GroupMsg;
 import xd.xdchat.api.entity.GroupMsgContent;
 import xd.xdchat.api.entity.RespPageBean;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-/**
- * (GroupMsgContent)表服务接口
- *
- * @author LSK
- * @date 2021/5/30 - 16:57
- */
+//(GroupMsgContent)表服务接口
 public interface GroupMsgContentService {
-
     /**
      * 通过ID查询单条数据
+     *
      *
      * @param id 主键
      * @return 实例对象
@@ -32,7 +29,7 @@ public interface GroupMsgContentService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<GroupMsgContent> queryAllByLimit(Integer offset, Integer limit);
+    Map<Integer,GroupMsg> queryAllByLimit(Integer offset, Integer limit);
 
     /**
      * 新增数据
@@ -62,5 +59,5 @@ public interface GroupMsgContentService {
 
     Integer deleteGroupMsgContentByIds(Integer[] ids);
 
-    void handleDownload(HttpServletResponse response) throws IOException;
+    GroupMsg getGroupMsgContentByIdGroup(Integer idGroup);
 }
