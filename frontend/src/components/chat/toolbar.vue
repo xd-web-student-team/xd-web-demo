@@ -58,7 +58,7 @@
     <el-dialog title="新建群聊" :before-close="closeBuildGroupDialog" :visible.sync="buildGroupDialog" width="30%">
       <el-form :model="groupForm" status-icon :rules="groupRules" ref="groupForm">
         <el-form-item prop="groupName">
-          <el-input v-model="groupForm.groupName" autocomplete="off" placeholder="请输入群聊名称"></el-input>
+          <el-input v-model="groupForm.groupName" autocomplete="off" placeholder="请输入群聊名称" @keyup.enter.native="buildGroup('groupForm')"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -68,7 +68,7 @@
     <el-dialog title="加入群聊" :before-close="closeBuildGroupDialog" :visible.sync="joinGroupDialog" width="30%">
       <el-form :model="groupForm" status-icon :rules="joinGroupRules" ref="groupForm">
         <el-form-item prop="groupName">
-          <el-input v-model="groupForm.groupName" autocomplete="off" placeholder="请输入群聊名称"></el-input>
+          <el-input v-model="groupForm.groupName" autocomplete="off" placeholder="请输入群聊名称" @keyup.enter.native="joinGroup('groupForm')"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
