@@ -1304,9 +1304,9 @@ VALUES ('2', '图片');
 INSERT INTO `message_type`
 VALUES ('3', '文件');
 -- ----------------------------
--- Table structure for user
+-- Table structure for user_info
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL COMMENT '登录账号',
@@ -1321,9 +1321,9 @@ CREATE TABLE `user` (
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_state_id`) REFERENCES `user_state` (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 23 DEFAULT CHARSET = utf8;
 -- ----------------------------
--- Records of user
+-- Records of user_info
 -- ----------------------------
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '1',
     'huang',
@@ -1334,7 +1334,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '2',
     'suolong',
@@ -1345,7 +1345,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '3',
     'hongfa',
@@ -1356,7 +1356,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '4',
     '22',
@@ -1367,7 +1367,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '5',
     'luojie',
@@ -1378,7 +1378,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '6',
     'aaa',
@@ -1389,7 +1389,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '7',
     'luo',
@@ -1400,7 +1400,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '8',
     'nami',
@@ -1411,7 +1411,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '9',
     'wusuopu',
@@ -1422,7 +1422,7 @@ VALUES (
     '1',
     '1'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '10',
     'qiaoba',
@@ -1433,7 +1433,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '11',
     'luobin',
@@ -1444,7 +1444,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '12',
     'fulanqi',
@@ -1455,7 +1455,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '13',
     'buluke',
@@ -1466,7 +1466,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '17',
     'lol',
@@ -1477,7 +1477,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '18',
     'abc',
@@ -1488,7 +1488,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '19',
     'uuu',
@@ -1499,7 +1499,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '20',
     'qwe',
@@ -1510,7 +1510,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '21',
     '老板',
@@ -1521,7 +1521,7 @@ VALUES (
     '1',
     '0'
   );
-INSERT INTO `user`
+INSERT INTO `user_info`
 VALUES (
     '22',
     'lin',
