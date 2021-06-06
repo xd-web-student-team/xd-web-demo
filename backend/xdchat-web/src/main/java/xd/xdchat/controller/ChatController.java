@@ -19,6 +19,10 @@ public class ChatController {
   @Autowired
   GroupService groupService;
 
+  static class GroupForm{
+    public String groupName;
+  }
+
   @GetMapping("/users")
   public List<User> getUsersWithoutCurrentUser(){
     return userService.getUsersWithoutCurrentUser();
@@ -34,8 +38,13 @@ public class ChatController {
   public Integer checkJoined(@RequestParam("idGroup")Integer idGroup) { return groupService.checkJoined(idGroup); }
 
   @PostMapping("/buildGroup")
-  public Group buildGroup(@RequestBody String groupName){groupName = groupName.substring(0, groupName.length()-1); return groupService.buildGroup(groupName);  }
+  public Group buildGroup(@RequestBody GroupForm groupForm){
+       return groupService.buildGroup(groupForm.groupName);
+  }
 
   @PostMapping("/joinGroup")
-  public Group joinGroup(@RequestBody String groupName){groupName = groupName.substring(0, groupName.length()-1); return groupService.joinGroup(groupName);  }
+  public Group joinGroup(@RequestBody GroupForm groupForm){System.out.println(groupForm.groupName);
+  //groupName = groupName.substring(0, groupName.length()-1);
+  return groupService.joinGroup(groupForm.groupName);
+  }
 }
