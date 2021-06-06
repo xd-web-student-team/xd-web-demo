@@ -1,7 +1,9 @@
 package xd.xdchat.dao;
 
-import xd.xdchat.api.entity.GroupMsgContent;
 import org.apache.ibatis.annotations.Param;
+import xd.xdchat.api.entity.Group;
+import xd.xdchat.api.entity.GroupMsg;
+import xd.xdchat.api.entity.GroupMsgContent;
 
 import java.util.Date;
 import java.util.List;
@@ -9,8 +11,8 @@ import java.util.List;
 /**
  * (GroupMsgContent)表数据库访问层
  *
- * @author LSK
- * @date 2021/5/30 - 16:57
+ * @author makejava
+ * @since 2020-06-17 10:51:13
  */
 public interface GroupMsgContentDao {
 
@@ -29,7 +31,7 @@ public interface GroupMsgContentDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<GroupMsgContent> queryAllByLimit(@Param("offset") Integer offset, @Param("limit") Integer limit);
+    GroupMsg queryAllByLimit(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("idGroup")Integer idGroup);
 
 
     /**

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xd.xdchat.dao.GroupDao">
+
+    <resultMap type="xd.xdchat.api.entity.Group" id="GroupMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="groupName" column="group_name" jdbcType="VARCHAR"/>
+        <result property="idGroupHolder" column="id_group_holder" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap type="java.lang.Integer" id="GroupIdMap">
+        <result property="id" column="id_group" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--获取所有加入的群组 -->
+    <select id="getGroups" resultMap="GroupMap">
+        select id, group_name, id_group_holder from group_name where id in (select id_group from group_contained_users where id_user=#{id})
+    </select>
+
+    <!--获取所有加入的群组id -->
+    <select id="getGroupIds" resultMap="GroupIdMap">
+        select id_group from group_contained_users where id_user=#{id}
+    </select>
+
+    <!--获取所有加入的群组 -->
+    <select id="checkGroupName" resultMap="GroupMap">
+        select id, group_name, id_group_holder from group_name where group_name=#{groupName}
+    </select>
+
+<!--    检查是否已加入群聊-->
+    <select id="checkJoined" resultMap="GroupIdMap">
+        select id_group from group_contained_users where id_group=#{idGroup} and id_user=#{idUser}
+    </select>
+
+    <insert id="joinGroup">
+        insert into group_contained_users (id_group, id_user)
+        values (#{idGroup}, #{id})
+    </insert>
+    <insert id="buildGroup" keyProperty="id" useGeneratedKeys="true">
+        insert into group_name (id, group_name, id_group_holder)
+        values (#{id}, #{groupName}, #{idGroupHolder})
+    </insert>
+</mapper>
