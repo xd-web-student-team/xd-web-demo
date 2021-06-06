@@ -23,4 +23,6 @@ public interface GroupDao {
     //加入群聊
     void joinGroup(Integer idGroup, Integer id);
 
+    //退出群聊
+    void quitGroup(Integer idGroup, Integer idUser);
 }

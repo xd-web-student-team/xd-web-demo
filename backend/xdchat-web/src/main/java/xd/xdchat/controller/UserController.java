@@ -19,8 +19,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-
-
     /**
      * 注册操作
      */
@@ -61,8 +59,8 @@ public class UserController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("selectOne")
-    public User selectOne(Integer id) {
+    @GetMapping("/selectOne")
+    public User selectOne(@RequestParam("id")Integer id) {
         return this.userService.queryById(id);
     }
 

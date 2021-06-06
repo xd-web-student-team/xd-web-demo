@@ -43,8 +43,13 @@ public class ChatController {
   }
 
   @PostMapping("/joinGroup")
-  public Group joinGroup(@RequestBody GroupForm groupForm){System.out.println(groupForm.groupName);
-  //groupName = groupName.substring(0, groupName.length()-1);
-  return groupService.joinGroup(groupForm.groupName);
+  public Group joinGroup(@RequestBody GroupForm groupForm){
+    return groupService.joinGroup(groupForm.groupName);
   }
+
+  @PostMapping("/quitGroup")
+  public void quitGroup(@RequestBody Group groupToQuit){
+    groupService.quitGroup(groupToQuit);
+  }
+
 }
