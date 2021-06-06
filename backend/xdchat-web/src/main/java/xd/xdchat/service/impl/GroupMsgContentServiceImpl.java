@@ -1,22 +1,21 @@
 package xd.xdchat.service.impl;
 
 import com.alibaba.excel.EasyExcel;
-import xd.xdchat.api.data.GroupMsgContentData;
-import xd.xdchat.api.entity.GroupMsgContent;
-import xd.xdchat.dao.GroupMsgContentDao;
-import xd.xdchat.api.entity.RespPageBean;
-import xd.xdchat.service.GroupMsgContentService;
 import org.springframework.stereotype.Service;
+import xd.xdchat.api.entity.Group;
+import xd.xdchat.api.entity.GroupMsg;
+import xd.xdchat.api.entity.GroupMsgContent;
+import xd.xdchat.api.entity.RespPageBean;
+import xd.xdchat.api.utils.UserUtil;
+import xd.xdchat.dao.GroupDao;
+import xd.xdchat.dao.GroupMsgContentDao;
+import xd.xdchat.service.GroupMsgContentService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URLEncoder;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * (GroupMsgContent)表服务实现类
@@ -28,6 +27,9 @@ import java.util.stream.Collectors;
 public class GroupMsgContentServiceImpl implements GroupMsgContentService {
     @Resource
     private GroupMsgContentDao groupMsgContentDao;
+
+    @Resource
+    private GroupDao groupDao;
 
     /**
      * 通过ID查询单条数据
@@ -48,10 +50,20 @@ public class GroupMsgContentServiceImpl implements GroupMsgContentService {
      * @return 对象列表
      */
     @Override
-    public List<GroupMsgContent> queryAllByLimit(Integer offset, Integer limit) {
-        return this.groupMsgContentDao.queryAllByLimit(offset, limit);
+    public Map<Integer,GroupMsg> queryAllByLimit(Integer offset, Integer limit) {
+        List<Integer> groupIds = groupDao.getGroupIds(UserUtil.getCurrentUser().getId());
+        Map<Integer,GroupMsg> res = new HashMap<>();
+        for(int i = 0; i< groupIds.size(); ++i){
+            res.put(groupIds.get(i),this.groupMsgContentDao.queryAllByLimit(offset, limit, groupIds.get(i)));
+        }
+        return res;
     }
 
+    //通过Group Id查询群聊数据
+    @Override
+    public GroupMsg getGroupMsgContentByIdGroup(Integer idGroup) {
+        return groupMsgContentDao.queryAllByLimit(null, null, idGroup);
+    }
     /**
      * 新增数据
      *
@@ -105,34 +117,5 @@ public class GroupMsgContentServiceImpl implements GroupMsgContentService {
         return groupMsgContentDao.deleteGroupMsgContentByIds(ids);
     }
 
-    /**
-     * 处理群聊记录的导出
-     * @param response
-     * @throws IOException
-     */
-    @Override
-    public void handleDownload(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.ms-excel");
-        response.setCharacterEncoding("utf-8");
-        //设置文件信息 这里URLEncoder.encode可以防止中文乱码
-        String fileName = URLEncoder.encode("群聊记录", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-        RespPageBean allGroupMsgContentByPage = getAllGroupMsgContentByPage(null, null, null, null, null);
-        List<GroupMsgContent> data = (List<GroupMsgContent>) allGroupMsgContentByPage.getData();
-        //转化数据为用于Excel导出的格式
-//        List<GroupMsgContentData> convertedData = data.stream().map(item -> {
-//            try {
-//                return GroupMsgContent.convertEntityToData(item);
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            }
-//            return new GroupMsgContentData();
-//        }).collect(Collectors.toList());
-
-        //写出数据到HttpServletResponse中
-        //EasyExcel.write(response.getOutputStream(),GroupMsgContentData.class).sheet("sheet1").doWrite(convertedData);
-        EasyExcel.write(response.getOutputStream(),GroupMsgContent.class).sheet("sheet1").doWrite(data);
-
-    }
 
 }
