@@ -40,4 +40,9 @@ public class GroupServiceImpl implements GroupService {
         groupDao.joinGroup(theGroup.getId(), UserUtil.getCurrentUser().getId());
         return theGroup;
     }
+
+    @Override
+    public void quitGroup(Group groupToQuit) {
+        groupDao.quitGroup(groupToQuit.getId(), UserUtil.getCurrentUser().getId());
+    }
 }

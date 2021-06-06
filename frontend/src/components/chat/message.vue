@@ -30,8 +30,9 @@
       </ul>
     </div> -->
     <!-- 群聊 -->
-    <div v-show="currentList == '群聊' && currentSessionGroup != null">
-      <div v-if="sessions['群聊'][currentSessionGroup.id] == null" style="text-align:center; padding: 40% 0 0 0">暂无消息</div>
+    <div v-show="currentList == '群聊' && currentSessionGroup != null
+      <div v-if="sessions['群聊'][currentSessionGroup.id] == null" style="text-align:center; padding: 20% 0; ">
+        <img :src="require('../../assets/image/目的地.png')" style="width:120px;"></div>
       <div v-else>
         <ul>
           <li v-for="entry in sessions['群聊'][currentSessionGroup.id].groupMsgContentList" :key="entry.id">
@@ -217,40 +218,6 @@ export default {
       }
       lastTime = newDate;
       return true;
-    },
-    //建群
-    buildGroup() {
-      this.$refs.groupForm.validate((valid) => {
-        console.log(valid)
-        if (valid) {
-          this.postKeyValueRequest("/chat/buildGroup?groupName=" + this.groupForm.groupName).then((resp) => {
-            this.$message({
-              message: '创建成功',
-              type: 'success'
-            });
-          });
-        } else {
-          this.$message.error("请正确填写信息！")
-          return false;
-        }
-      })
-    },
-    //加群
-    joinGroup() {
-      this.$refs.groupForm.validate((valid) => {
-        if (valid) {
-          this.postKeyValueRequest("/chat/joinGroup?groupName=" + this.groupForm.groupName).then((resp) => {
-            this.$message({
-              message: '加入成功',
-              type: 'success'
-            });
-          });
-        }
-      })
-    },
-    //加好友
-    beFriend() {
-
     },
   },
 };

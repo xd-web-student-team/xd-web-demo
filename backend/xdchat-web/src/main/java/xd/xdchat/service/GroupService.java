@@ -20,4 +20,6 @@ public interface GroupService {
     //加入群聊
     Group joinGroup(String groupName);
 
+    //退出群聊
+    void quitGroup(Group groupToQuit);
 }
