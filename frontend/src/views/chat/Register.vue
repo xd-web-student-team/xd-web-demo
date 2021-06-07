@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <!-- <el-header>
+    <el-header>
       <el-button
         @click="gotoLogin"
         icon="el-icon-d-arrow-left"
@@ -49,6 +49,25 @@
               placeholder="请再次输入密码"
             ></el-input>
           </el-form-item>
+          <el-form-item label="头像：" :label-width="formLabelWidth">
+            <el-upload
+              action="/user/upload_profile"
+              ref="upload"
+              list-type="picture-card"
+              :class="{ disabled: uploadDisabled }"
+              :before-upload="beforeAvatarUpload"
+              :file-list="fileList"
+              :on-progress="onProgress"
+              :on-success="imgSuccess"
+              :on-error="imgError"
+              :on-remove="imgRemove"
+            >
+              <i class="el-icon-plus"></i>
+              <div slot="tip" class="el-upload__tip">
+                图片小于4M(可使用默认头像！)
+              </div>
+            </el-upload>
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="primary" @click="submitRegister" style="width: 100%"
@@ -56,7 +75,7 @@
           >
         </div>
       </div>
-    </el-main> -->
+    </el-main>
   </el-container>
 </template>
 
@@ -109,20 +128,24 @@ export default {
       },
       formLabelWidth: "120px",
       rules: {
-        username: [
-          { validator: validateUsername, trigger: "blur" },
-          { required: true, max: 20, message: "用户名过长", trigger: "blur" },
-        ],
         nickname: [
           { required: true, message: "昵称为空", trigger: "blur" },
           { max: 20, message: "昵称过长", trigger: "blur" },
         ],
+        username: [
+          { validator: validateUsername, trigger: "blur" },
+          { required: true, message: "用户名为空", trigger: "blur" },
+          { min: 3, max: 20, message: "用户名长度为3-20", trigger: "blur" },
+        ],
         password: [
           { validator: validatePass, trigger: "blur" },
-          { required: true, max: 20, message: "密码过长", trigger: "blur" },
+          { required: true, message: "密码为空", trigger: "blur" },
+          { min: 3, max: 20, message: "密码长度为3-20", trigger: "blur" },
         ],
         checkPass: [
-          { required: true, validator: validatePass2, trigger: "blur" },
+          { validator: validatePass2, trigger: "blur" },
+          { required: true, message: "密码为空", trigger: "blur" },
+          { min: 3, max: 20, message: "密码长度为3-20", trigger: "blur" },
         ],
       },
       uploadDisabled: false,
@@ -153,6 +176,49 @@ export default {
           return false;
         }
       });
+    },
+    closeRegisterDialog(done) {
+      this.registerForm = {
+        //清空表单
+        nickname: "",
+        username: "",
+        password: "",
+        checkPass: "",
+        userProfile: "",
+      };
+      //this.$refs.upload.clearFiles();//清除上传组件的图片
+      done(); //关闭对话框
+    },
+    /**
+     *       图片上传的方法
+     */
+    //上传前
+    beforeAvatarUpload(file) {
+      let isLt4M = file.size / 1024 / 1024 < 4;
+
+      if (!isLt4M) {
+        this.$message.error("上传头像图片大小不能超过 4MB!");
+      }
+      return isLt4M;
+    },
+    // 上传中
+    onProgress(event, file, fileList) {
+      this.uploadDisabled = true;
+    },
+    // 图片上传成功
+    imgSuccess(response, file, fileList) {
+      this.uploadDisabled = true;
+      this.registerForm.userProfile = response; //将返回的路径给表单的头像属性
+      console.log("图片url为：" + this.registerForm.userProfile);
+    },
+    // 图片上传失败
+    imgError(err, file, fileList) {
+      this.$message.error("上传失败");
+      this.uploadDisabled = false;
+    },
+    //移除图片
+    imgRemove(file, fileList) {
+      this.uploadDisabled = false;
     },
   },
 };
