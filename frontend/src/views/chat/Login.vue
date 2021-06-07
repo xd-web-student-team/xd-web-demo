@@ -33,8 +33,6 @@
               placeholder="请输入密码"
             ></el-input>
           </el-form-item>
-          <el-checkbox v-model="checked" class="loginRemember"></el-checkbox
-          ><span> 记住我一周</span>
           <div>
             <el-button
               @click="showRegistryDialog"
@@ -108,7 +106,7 @@
         </el-form-item>
         <el-form-item label="用户头像：" :label-width="formLabelWidth">
           <el-upload
-            action="/file"
+            action="/user/upload_profile"
             ref="upload"
             list-type="picture-card"
             :class="{ disabled: uploadDisabled }"
@@ -142,19 +140,6 @@
 export default {
   name: "Login",
   data() {
-    var validateNickname = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入昵称"));
-      }
-      //检查昵称是否重复
-      this.getRequest("user/checkNickname?nickname=" + value).then((resp) => {
-        if (resp != 0) {
-          callback(new Error("该昵称已被注册"));
-        } else {
-          callback();
-        }
-      });
-    };
     var validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入用户名"));
@@ -191,16 +176,16 @@ export default {
       loginForm: {
         username: "",
         password: "",
-        // code: "",
       },
-      verifyCode: "/verifyCode",
-      checked: true,
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: "用户名为空", trigger: "blur" },
+          { min: 3, max: 20, message: "用户名长度为3-20", trigger: "blur" },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        // code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+        password: [
+          { required: true, message: "密码为空", trigger: "blur" },
+          { min: 3, max: 20, message: "密码长度为3-20", trigger: "blur" },
+        ],
       },
       fullscreenLoading: false,
       //注册表单相关
@@ -214,10 +199,25 @@ export default {
         userProfile: "",
       },
       registerRules: {
-        nickname: [{ validator: validateNickname, trigger: "blur" }],
-        username: [{ validator: validateUsername, trigger: "blur" }],
-        password: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+        nickname: [
+          { required: true, message: "昵称为空", trigger: "blur" },
+          { max: 20, message: "昵称过长", trigger: "blur" },
+        ],
+        username: [
+          { validator: validateUsername, trigger: "blur" },
+          { required: true, message: "用户名为空", trigger: "blur" },
+          { min: 3, max: 20, message: "用户名长度为3-20", trigger: "blur" },
+        ],
+        password: [
+          { validator: validatePass, trigger: "blur" },
+          { required: true, message: "密码为空", trigger: "blur" },
+          { min: 3, max: 20, message: "密码长度为3-20", trigger: "blur" },
+        ],
+        checkPass: [
+          { validator: validatePass2, trigger: "blur" },
+          { required: true, message: "密码为空", trigger: "blur" },
+          { min: 3, max: 20, message: "密码长度为3-20", trigger: "blur" },
+        ],
       },
       uploadDisabled: false,
       //上传的文件信息列表
@@ -252,11 +252,11 @@ export default {
         }
       });
     },
-    changeverifyCode() {
-      this.verifyCode = "/verifyCode?time=" + new Date();
-    },
     gotoAdminLogin() {
       this.$router.replace("/adminlogin");
+    },
+    gotoRegister() {
+      this.$router.replace("/register");
     },
     showRegistryDialog() {
       this.registerDialogVisible = true;

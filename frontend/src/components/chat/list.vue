@@ -9,12 +9,18 @@
       <!--群聊列表-->
       <ul v-if="currentList == '群聊'">
         <p style="padding: 2px 4px; height: 20px">群聊列表</p>
-        <li v-for="item in groups"
-          v-on:click="changeCurrentSessionGroup(item)" v-bind:key="item.id">
+        <li
+          v-for="item in groups"
+          v-on:click="changeCurrentSessionGroup(item)"
+          v-bind:key="item.id"
+        >
           <div style="display: flex; justify-content: space-between">
             <div>
-              <el-badge :is-dot="isDot[user.username+'#'+item.id]">
-                <el-image class="avatar" :src="require('../../assets/image/group.png')">
+              <el-badge>
+                <el-image
+                  class="avatar"
+                  :src="require('../../assets/image/group.png')"
+                >
                   <div slot="error" class="image-slot">
                     <i class="el-icon-picture-outline"></i>
                   </div>
@@ -43,7 +49,9 @@
           <div style="display: flex; justify-content: space-between">
             <div>
               <el-badge
-                :is-dot="isDot[user.username + '#' + item.username]">
+                :is-dot="isDot[user.username + '#' + item.username]"
+                style=""
+              >
                 <el-image
                   class="avatar"
                   :preview-src-list="[item.userProfile]"
@@ -67,7 +75,7 @@
         </li>
       </ul>
     </el-scrollbar>
-   
+
     <!-- 待做 -->
     <!-- <li
         :class="{
@@ -87,7 +95,7 @@
       </li>
     </ul> -->
     <!--机器人-->
-    <ul v-if="currentList == '机器人'">
+    <!-- <ul v-if="currentList == '机器人'">
       <p style="padding: 2px 4px; height: 20px">快来和机器人聊天吧！</p>
       <li
         :class="{
@@ -101,8 +109,7 @@
         />
         <p class="name">智能回复机器人</p>
       </li>
-    </ul>
-    
+    </ul> -->
   </div>
 </template>
 
@@ -114,12 +121,12 @@ export default {
   data() {
     return {
       user: this.$store.state.currentUser,
-      robotObj: {
+      /* robotObj: {
         username: "机器人",
         nickname: "机器人",
         userProfile:
           "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2548892998,499717296&fm=26&gp=0.jpg",
-      },
+      }, */
     };
   },
   computed: mapState([
