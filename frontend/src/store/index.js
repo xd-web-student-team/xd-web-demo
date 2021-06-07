@@ -37,15 +37,13 @@ const store =  new Vuex.Store({
     },
     changeCurrentSessionGroup (state,currentSession) {
       //切换到当前用户就标识消息已读
-      // Vue.set(state.isDot,state.currentUser.username+"#"+currentSession.username,false);
+      Vue.set(state.isDot,state.currentUser.username+"#"+currentSession.id,false);
       //更新当前选中的用户
       state.currentSessionGroup = currentSession;
     },
     //修改当前聊天窗口列表
     changeCurrentList(state,currentList){
       state.currentList = currentList;
-      if (currentList = '群聊') state.isGroup = true;
-      else  state.isGroup = false;
     },
     //保存群聊消息记录
     addGroupMessage(state,msg){
@@ -152,12 +150,9 @@ const store =  new Vuex.Store({
           let receiveMsg=JSON.parse(msg.body);
           //console.log("收到消息"+receiveMsg);
           //当前点击的聊天界面不是群聊,默认为消息未读
-          // if (context.state.currentSessionGroup.id!=receiveMsg.idGroup){
-          //   Vue.set(context.state.isDot,context.state.currentUser.username+"#西电人总群",true);
-          // }
-          // else if(context.state.currentSession.username!="西电计科院交流群"){
-          //   Vue.set(context.state.isDot,context.state.currentUser.username+"#西电计科院交流群",true);
-          // }
+          if (context.state.currentSessionGroup.id!=receiveMsg.idGroup){
+            Vue.set(context.state.isDot,context.state.currentUser.username+'#'+receiveMsg.idGroup,true);
+          }
           //提交消息记录
           context.commit('addGroupMessage',receiveMsg);
         });
@@ -218,7 +213,7 @@ const store =  new Vuex.Store({
 store.watch(function (state) {
   return state.sessions
 },function (val) {
-  console.log('CHANGE: ', val);
+  //console.log('CHANGE: ', val);
   localStorage.setItem('chat-session', JSON.stringify(val));
 },{
   deep:true/*这个貌似是开启watch监测的判断,官方说明也比较模糊*/
