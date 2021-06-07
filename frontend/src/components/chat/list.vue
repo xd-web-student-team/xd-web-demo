@@ -13,7 +13,7 @@
           v-on:click="changeCurrentSessionGroup(item)" v-bind:key="item.id">
           <div style="display: flex; justify-content: space-between">
             <div>
-              <el-badge>
+              <el-badge :is-dot="isDot[user.username+'#'+item.id]">
                 <el-image class="avatar" :src="require('../../assets/image/group.png')">
                   <div slot="error" class="image-slot">
                     <i class="el-icon-picture-outline"></i>
@@ -43,9 +43,7 @@
           <div style="display: flex; justify-content: space-between">
             <div>
               <el-badge
-                :is-dot="isDot[user.username + '#' + item.username]"
-                style=""
-              >
+                :is-dot="isDot[user.username + '#' + item.username]">
                 <el-image
                   class="avatar"
                   :preview-src-list="[item.userProfile]"
