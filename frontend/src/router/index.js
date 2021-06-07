@@ -4,6 +4,10 @@ import Login from '../views/chat/Login'
 import AdminLogin from '../views/admin/AdminLogin'
 import Register from '../views/chat/Register'
 import ChatRoom from '../views/chat/ChatRoom'
+import GroupChatRecord from '../views/admin/GroupChatRecord.vue'
+import PrivateChatRecord from '../views/admin/PrivateChatRecord.vue'
+import UserInfo from '../views/admin/UserInfo'
+import Home from '../views/admin/Home';
 
 Vue.use(VueRouter)
 
