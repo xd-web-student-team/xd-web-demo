@@ -49,7 +49,7 @@ const store =  new Vuex.Store({
     },
     //保存群聊消息记录
     addGroupMessage(state,msg){
-      state.sessions['群聊'][state.currentSessionGroup.id].groupMsgContentList.push({
+      state.sessions['群聊'][msg.idGroup].groupMsgContentList.push({
         fromId:msg.fromId,
         fromName:msg.fromName,
         fromProfile:msg.fromProfile,
@@ -60,7 +60,7 @@ const store =  new Vuex.Store({
       })
     },
     //保存单聊数据
-    addMessage (state,msg) {
+    addMessage(state, msg) {
       let message=state.sessions[state.currentUser.username+"#"+msg.to];
       if (!message){
         //创建保存消息记录的数组
@@ -218,7 +218,7 @@ const store =  new Vuex.Store({
 store.watch(function (state) {
   return state.sessions
 },function (val) {
-  //console.log('CHANGE: ', val);
+  console.log('CHANGE: ', val);
   localStorage.setItem('chat-session', JSON.stringify(val));
 },{
   deep:true/*这个貌似是开启watch监测的判断,官方说明也比较模糊*/
