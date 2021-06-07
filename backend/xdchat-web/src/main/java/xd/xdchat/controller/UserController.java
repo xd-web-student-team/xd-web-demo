@@ -1,11 +1,16 @@
 package xd.xdchat.controller;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.csource.common.MyException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import xd.xdchat.api.entity.RespBean;
 import xd.xdchat.api.entity.RespPageBean;
 import xd.xdchat.api.entity.User;
 import xd.xdchat.service.UserService;
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * (User)表控制层
@@ -24,6 +29,8 @@ public class UserController {
      */
     @PostMapping("/register")
     public RespBean addUser(@RequestBody User user){
+        if(user.getUserProfile()=="")
+            user.setUserProfile("http://localhost:8080/avatar/default_avatar.jpg");
         if (userService.insert(user)==1){
             return RespBean.ok("注册成功！");
         }else{
@@ -41,17 +48,26 @@ public class UserController {
         return userService.checkUsername(username);
     }
 
-    /**
-     * 注册操作，检查昵称是否已被注册
-     * @param nickname
-     * @return
-     */
-    @GetMapping("/checkNickname")
-    public Integer checkNickname(@RequestParam("nickname") String nickname){
-        //System.out.println(nickname);
-        Integer result=userService.checkNickname(nickname);
-        return result;
+    @PostMapping("/upload_profile")
+    public String uploadFlie(@RequestParam MultipartFile file) throws IOException, MyException {
+
+        String fileName = file.getOriginalFilename();
+        String newFileName = DigestUtils.sha1Hex(file.getInputStream()) + "." + fileName.substring(fileName.lastIndexOf('.'));
+
+
+        String path = "E://avatar//";
+
+        File newFile = new File(path + newFileName);
+        try {
+            file.transferTo(newFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String url = "http://localhost:8080/avatar/" + newFileName;
+
+        return url;
     }
+
 
     /**
      * 通过主键查询单条数据
