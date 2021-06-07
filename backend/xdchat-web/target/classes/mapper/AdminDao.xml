@@ -18,7 +18,7 @@
     <select id="queryById" resultMap="AdminMap">
         select
         id, username, nickname, password, user_profile
-        from subtlechat.admin
+        from admin
         where id = #{id}
     </select>
 
@@ -26,7 +26,7 @@
     <select id="queryAllByLimit" resultMap="AdminMap">
         select
         id, username, nickname, password, user_profile
-        from subtlechat.admin
+        from admin
         limit #{offset}, #{limit}
     </select>
 
@@ -34,7 +34,7 @@
     <select id="queryAll" resultMap="AdminMap">
         select
         id, username, nickname, password, user_profile
-        from subtlechat.admin
+        from admin
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -56,13 +56,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into subtlechat.admin(username, nickname, password, user_profile)
+        insert into admin(username, nickname, password, user_profile)
         values (#{username}, #{nickname}, #{password}, #{userProfile})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update subtlechat.admin
+        update admin
         <set>
             <if test="username != null and username != ''">
                 username = #{username},
@@ -82,7 +82,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from subtlechat.admin where id = #{id}
+        delete from admin where id = #{id}
     </delete>
 
 </mapper>

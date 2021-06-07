@@ -26,7 +26,7 @@ public class User  implements UserDetails {
     /**
      * 用户头像
      */
-    private String userProfile;
+    private String userProfile="http://localhost:8080/avatar/default_avatar.jpg";
     /**
      * 用户状态id
      */

@@ -14,19 +14,19 @@
     </resultMap>
     <!--根据用户名查询用户 -->
     <select id="loadUserByUsername" resultMap="UserMap">
-        select * from subtlechat.user where username=#{username}
+        select * from user_info where username=#{username}
     </select>
 
     <!--获取所有用户数据 -->
     <select id="getUsersWithoutCurrentUser" resultMap="UserMap" parameterType="java.lang.Integer">
-        select id, username, nickname, user_profile, user_state_id, is_enabled, is_locked from user where id!=#{id}
+        select id, username, nickname, user_profile, user_state_id, is_enabled, is_locked from user_info where id!=#{id}
     </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
         id, username, nickname, password, user_profile, user_state_id, is_enabled, is_locked
-        from subtlechat.user
+        from user_info
         where id = #{id}
     </select>
 
@@ -34,7 +34,7 @@
     <select id="queryAllByLimit" resultMap="UserMap">
         select
         id, username, nickname, password, user_profile, user_state_id, is_enabled, is_locked
-        from subtlechat.user
+        from user_info
         limit #{offset}, #{limit}
     </select>
 
@@ -42,7 +42,7 @@
     <select id="queryAll" resultMap="UserMap">
         select
         id, username, nickname, password, user_profile, user_state_id, is_enabled, is_locked
-        from subtlechat.user
+        from user_info
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -73,13 +73,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into subtlechat.user(username, nickname, password, user_profile, user_state_id, is_enabled, is_locked)
+        insert into user_info (username, nickname, password, user_profile, user_state_id, is_enabled, is_locked)
         values (#{username}, #{nickname}, #{password}, #{userProfile}, #{userStateId}, #{isEnabled}, #{isLocked})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update subtlechat.user
+        update user_info
         <set>
             <if test="username != null and username != ''">
                 username = #{username},
@@ -108,24 +108,24 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from subtlechat.user where id = #{id}
+        delete from user_info where id = #{id}
     </delete>
 
     <update id="setUserStateToOn">
-        update subtlechat.user set user_state_id=1 where id=#{id}
+        update user_info set user_state_id=1 where id=#{id}
     </update>
     <update id="setUserStateToLeave">
-        update subtlechat.user set user_state_id=2 where id=#{id}
+        update user_info set user_state_id=2 where id=#{id}
     </update>
     <select id="checkUsername" resultType="java.lang.Integer">
-        select count(*) from user where username=#{username}
+        select count(*) from user_info where username=#{username}
     </select>
     <select id="checkNickname" resultType="java.lang.Integer">
-        select count(*) from user where nickname=#{nickname}
+        select count(*) from user_info where nickname=#{nickname}
     </select>
     <!--    按条件查询所有的用户-->
     <select id="getAllUserByPage" resultMap="UserMap">
-        select * from user where 1=1
+        select * from user_info where 1=1
         <if test="keyword!=null and keyword!=''">
             and nickname like concat('%',#{keyword},'%')
         </if>
@@ -137,7 +137,7 @@
         </if>
     </select>
     <select id="getTotal" resultType="java.lang.Long">
-        select count(*) from user where 1=1
+        select count(*) from user_info where 1=1
         <if test="keyword!=null and keyword!=''">
             and nickname like concat('%',#{keyword},'%')
         </if>
@@ -146,10 +146,10 @@
         </if>
     </select>
     <update id="changeLockedStatus">
-        update user set is_locked=#{isLocked} where id=#{id}
+        update user_info set is_locked=#{isLocked} where id=#{id}
     </update>
     <delete id="deleteByIds">
-        delete from user where id in
+        delete from user_info where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>

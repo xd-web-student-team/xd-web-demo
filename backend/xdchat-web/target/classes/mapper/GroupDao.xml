@@ -39,4 +39,8 @@
         insert into group_name (id, group_name, id_group_holder)
         values (#{id}, #{groupName}, #{idGroupHolder})
     </insert>
+    <delete id="quitGroup">
+        delete from group_contained_users
+        where id_group=#{idGroup} and id_user=#{idUser}
+    </delete>
 </mapper>
