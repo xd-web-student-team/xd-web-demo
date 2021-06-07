@@ -180,7 +180,10 @@
               Vue.set(this.$store.state.groups,this.$store.state.groups.length,resp);
               let idGroup = resp.id
               this.getRequest("/groupMsgContent/queryByIdGroup?idGroup="+idGroup).then((resp) => {
-                Vue.set(this.$store.state.sessions['群聊'], idGroup, resp);
+                if(!resp){
+                  Vue.set(this.$store.state.sessions['群聊'], idGroup, { groupMsgContentList:[],idGroup:idGroup});
+                }
+                else Vue.set(this.$store.state.sessions['群聊'], idGroup, resp);
               })
               this.$message({
                 message: '加入成功',
