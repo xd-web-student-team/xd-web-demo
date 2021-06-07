@@ -1,75 +1,68 @@
 <template>
 <div id="message" v-scroll-bottom="sessions">
-	<!-- <div v-show="currentList == '私聊'">
+  <!-- 群聊 -->
+  <div v-show="currentList == '群聊' && currentSessionGroup != null">
+    <div v-if="sessions['群聊'][currentSessionGroup.id] == null" style="text-align:center; padding: 20% 0; ">
+      <img :src="require('../../assets/image/目的地.png')" style="width:120px;"></div>
+    <div v-else>
       <ul>
-        <li
-          v-for="entry in sessions[
-            user.username + '#' + currentSession.username
-          ]" :key="entry"
-        >
-          <p class="time">
-            <span>{{ entry.date | time }}</span>
+        <li v-for="entry in sessions['群聊'][currentSessionGroup.id].groupMsgContentList" :key="entry.id">
+          <p class="time" v-show="updateLastTime(entry.createTime)">
+            <span>{{ entry.createTime | time }}</span>
           </p>
-          <div class="main" :class="{ self: entry.self }">
-            <p class="username">{{ entry.fromNickname }}</p>
+          <div class="main" :class="{ self: entry.fromId == user.id }">
+            <p class="username">{{ entry.fromName }}</p>
             <img
+              @dblclick="takeAShot"
               class="avatar"
-              :src="entry.self ? user.userProfile : currentSession.userProfile"
+              :src="
+                entry.fromId == user.id ? user.userProfile : entry.fromProfile
+              "
               alt=""
             />
-            <p v-if="entry.messageTypeId == 1" class="text">
-              {{ entry.content }}
-            </p>
-            <img
-              v-if="entry.messageTypeId == 2"
-              :src="entry.content"
-              class="img"
-            />
+            <div v-if="entry.messageTypeId == 1">
+              <p class="text" v-html="entry.content"></p>
+            </div>
+            <div v-else>
+              <el-image
+                :src="entry.content"
+                :preview-src-list="[entry.content]"
+                class="img"
+              >
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
+            </div>
           </div>
         </li>
       </ul>
-    </div> -->
-    <!-- 群聊 -->
-    <div v-show="currentList == '群聊' && currentSessionGroup != null
-      <div v-if="sessions['群聊'][currentSessionGroup.id] == null" style="text-align:center; padding: 20% 0; ">
-        <img :src="require('../../assets/image/目的地.png')" style="width:120px;"></div>
-      <div v-else>
-        <ul>
-          <li v-for="entry in sessions['群聊'][currentSessionGroup.id].groupMsgContentList" :key="entry.id">
-            <p class="time" v-show="updateLastTime(entry.createTime)">
-              <span>{{ entry.createTime | time }}</span>
-            </p>
-            <div class="main" :class="{ self: entry.fromId == user.id }">
-              <p class="username">{{ entry.fromName }}</p>
-              <img
-                @dblclick="takeAShot"
-                class="avatar"
-                :src="
-                  entry.fromId == user.id ? user.userProfile : entry.fromProfile
-                "
-                alt=""
-              />
-              <div v-if="entry.messageTypeId == 1">
-                <p class="text" v-html="entry.content"></p>
-              </div>
-              <div v-else>
-                <el-image
-                  :src="entry.content"
-                  :preview-src-list="[entry.content]"
-                  class="img"
-                >
-                  <div slot="error" class="image-slot">
-                    <i class="el-icon-picture-outline"></i>
-                  </div>
-                </el-image>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
-    
   </div>
+  <!-- 私聊 -->
+
+  <div v-show="currentList == '私聊'">
+    <ul>{{ user.username+'#'+currentSession.username }}
+      <li
+        v-for="entry in sessions[user.username+'#'+currentSession.username]" :key="entry.date">
+        <p class="time" v-show="updateLastTime(entry.date)">
+          <span>{{ entry.date | time }}</span>
+        </p>
+        <div class="main" :class="{ self: entry.self }">
+          <p class="username">{{ entry.fromNickname }}</p>
+          <img class="avatar" :src="entry.self ? user.userProfile : currentSession.userProfile"
+            alt=""/>
+          <p v-if="entry.messageTypeId == 1" class="text">{{ entry.content }}</p>
+          <img
+            v-if="entry.messageTypeId == 2"
+            :src="entry.content"
+            class="img"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 </template>
 
 <script>
@@ -83,9 +76,9 @@ export default {
     var validateGroupName = (rule, value, callback) => {
       //检查群名是否重复
       this.getRequest("chat/checkGroupName?groupName=" + value).then((resp) => {
-        if (resp != 0) {console.log("116")
+        if (resp != 0) {
           callback(new Error("该群名已被注册"));
-        } else {console.log("118")
+        } else {
           callback();
         }
       });
