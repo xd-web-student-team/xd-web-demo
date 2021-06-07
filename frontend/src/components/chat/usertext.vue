@@ -69,8 +69,10 @@ export default {
     }
   },
   computed: mapState([
+    "stomp",
     "sessions",
     "currentList",
+    "currentUser",
     "currentSession",
     "currentSessionGroup",
   ]),
@@ -79,14 +81,23 @@ export default {
       let msgObj = new Object();
       msgObj.content = this.content;
       msgObj.messageTypeId = 1;
-      msgObj.idGroup = this.currentSessionGroup.id;
       //发送群聊消息，如果为空则不发送
       if (this.content != "") {
-        //console.log(this.content);
-        this.$store.state.stomp.send(
+        if(this.currentList=='群聊'){
+          msgObj.idGroup = this.currentSessionGroup.id;
+          this.$store.state.stomp.send(
           "/ws/groupChat", {},
           JSON.stringify(msgObj)
         );
+        } else if(this.currentList=='私聊') {
+          msgObj.from = this.currentUser.username;
+          msgObj.fromNickname = this.currentUser.nickname;
+          msgObj.to = this.currentSession.username;
+          //提交私聊消息记录
+          this.$store.commit("addMessage", msgObj);
+          this.stomp.send("/ws/chat", {}, JSON.stringify(msgObj));
+        }
+        
       }
       //给机器人发送消息，如果为空则不发送
       // if (this.content != "") {
@@ -103,12 +114,7 @@ export default {
       //   }
       //   //发送私聊消息
       //   else {
-      //     msgObj.from = this.$store.state.currentUser.username;
-      //     msgObj.fromNickname = this.$store.state.currentUser.nickname;
-      //     msgObj.to = this.currentSession.username;
-      //     this.$store.state.stomp.send("/ws/chat", {}, JSON.stringify(msgObj));
-      //     //提交私聊消息记录
-      //     this.$store.commit("addMessage", msgObj);
+         
       //   }
       // }
 
