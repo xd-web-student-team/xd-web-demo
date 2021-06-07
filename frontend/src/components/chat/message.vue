@@ -42,7 +42,7 @@
   <!-- 私聊 -->
 
   <div v-show="currentList == '私聊'">
-    <ul>{{ user.username+'#'+currentSession.username }}
+    <ul>
       <li
         v-for="entry in sessions[user.username+'#'+currentSession.username]" :key="entry.date">
         <p class="time" v-show="updateLastTime(entry.date)">
