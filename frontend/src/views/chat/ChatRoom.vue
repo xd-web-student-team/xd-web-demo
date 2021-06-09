@@ -73,19 +73,19 @@
     .toolbar{
       float: left;
       color: #f4f4f4;
-      background-color: #2e3238;
+      background-color: rgba(46, 50, 56, 1);
       width: 60px;
     }
     .sidebar {
       float: left;
       color: #000000;
-      background-color: #ECEAE8;
+      background-color: rgba(235, 235, 235, 0.9);
       width: 240px;
     }
     .main {
       position: relative;
       overflow: hidden;
-      background-color: #eee;
+      background-color: rgba(238, 238, 238, 0.9);
     }
   }
 </style>

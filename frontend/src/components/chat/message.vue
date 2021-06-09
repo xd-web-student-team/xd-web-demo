@@ -237,8 +237,7 @@ export default {
       display: inline-block;
       padding: 0 18px;
       font-size: 12px;
-      color: #fff;
-      background-color: #dcdcdc;
+      color:rgb(61, 61, 61);
       border-radius: 2px;
     }
   }

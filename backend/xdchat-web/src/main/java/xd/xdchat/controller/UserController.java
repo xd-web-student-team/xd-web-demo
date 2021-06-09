@@ -1,16 +1,13 @@
 package xd.xdchat.controller;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.csource.common.MyException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import xd.xdchat.api.entity.Group;
 import xd.xdchat.api.entity.RespBean;
 import xd.xdchat.api.entity.RespPageBean;
 import xd.xdchat.api.entity.User;
 import xd.xdchat.service.UserService;
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 /**
  * (User)表控制层
@@ -29,8 +26,6 @@ public class UserController {
      */
     @PostMapping("/register")
     public RespBean addUser(@RequestBody User user){
-        if(user.getUserProfile()=="")
-            user.setUserProfile("http://localhost:8080/avatar/default_avatar.jpg");
         if (userService.insert(user)==1){
             return RespBean.ok("注册成功！");
         }else{
@@ -46,6 +41,18 @@ public class UserController {
     @GetMapping("/checkUsername")
     public Integer checkUsername(@RequestParam("username")String username){
         return userService.checkUsername(username);
+    }
+
+    /**
+     * 注册操作，检查昵称是否已被注册
+     * @param nickname
+     * @return
+     */
+    @GetMapping("/checkNickname")
+    public Integer checkNickname(@RequestParam("nickname") String nickname){
+        //System.out.println(nickname);
+        Integer result=userService.checkNickname(nickname);
+        return result;
     }
 
     @PostMapping("/upload_profile")
@@ -80,6 +87,15 @@ public class UserController {
         return this.userService.queryById(id);
     }
 
+    /**
+     * 获取群成员信息
+     * @param Group
+     * @return List<User>
+     */
+    @PostMapping("/getGroupMembers")
+    public List<User> getGroupMembers(@RequestBody Group currentGroup){
+        return userService.getGroupMembers(currentGroup);
+    }
     /**
      * @author luo
      * @param page  页数，对应数据库查询的起始行数

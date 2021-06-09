@@ -1,6 +1,7 @@
 package xd.xdchat.service;
 
 import org.springframework.stereotype.Service;
+import xd.xdchat.api.entity.Group;
 import xd.xdchat.api.entity.RespPageBean;
 import xd.xdchat.api.entity.User;
 import java.util.List;
@@ -84,9 +85,17 @@ public interface UserService {
      */
     Integer checkNickname(String nickname);
 
+    /**
+     * 获取群成员信息
+     * @param currentGroup
+     * @return
+     */
+    List<User> getGroupMembers(Group currentGroup);
+
     RespPageBean getAllUserByPage(Integer page, Integer size,  String keyword,Integer isLocked);
 
     Integer changeLockedStatus(Integer id, Boolean isLocked);
 
     Integer deleteByIds(Integer[] ids);
+
 }

@@ -85,7 +85,7 @@ export default {
       if (this.content != "") {
         if(this.currentList=='群聊'){
           msgObj.idGroup = this.currentSessionGroup.id;
-          this.$store.state.stomp.send(
+          this.stomp.send(
           "/ws/groupChat", {},
           JSON.stringify(msgObj)
         );
@@ -137,7 +137,7 @@ export default {
       }
       //判断图片大小
       let isLt1M = file.size / 1024 / 1024 < 1;
-      console.log(file);
+      //console.log(file);
       if (!isLt1M) {
         this.$message.error("上传图片大小不能超过 1MB!");
       }
@@ -156,31 +156,23 @@ export default {
     },
     // 图片上传成功
     imgSuccess(response, file, fileList) {
-      console.log("图片url为：" + response);
+      //console.log("图片url为：" + response);
       let msgObj = new Object();
       msgObj.content = response;
       //设置消息类型为图片
       msgObj.messageTypeId = 2;
-      if (this.currentSession.username == "西电人总群") {
+      if(this.currentList=='群聊'){
+        msgObj.idGroup = this.currentSessionGroup.id;
         this.$store.state.stomp.send(
-          "/ws/groupChat",
-          {},
-          JSON.stringify(msgObj)
-        );
-      } else if (this.currentSession.username == "西电计科院交流群") {
-        this.$store.state.stomp.send(
-          "/ws/groupChat",
-          {},
-          JSON.stringify(msgObj)
-        );
+        "/ws/groupChat", {},
+        JSON.stringify(msgObj)
+      );
       } else {
-        msgObj.from = this.$store.state.currentUser.username;
-        msgObj.fromNickname = this.$store.state.currentUser.nickname;
         msgObj.to = this.currentSession.username;
-        this.$store.state.stomp.send("/ws/chat", {}, JSON.stringify(msgObj));
         //提交私聊消息记录
         this.$store.commit("addMessage", msgObj);
-      }
+        this.stomp.send("/ws/chat", {}, JSON.stringify(msgObj));
+      } 
     },
     // 图片上传失败
     imgError(err, file, fileList) {

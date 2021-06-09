@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import xd.xdchat.api.entity.Group;
 import xd.xdchat.dao.UserDao;
 import xd.xdchat.api.entity.RespPageBean;
 import xd.xdchat.api.entity.User;
@@ -133,8 +134,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Integer checkNickname(String nickname) {
-        System.out.println(nickname);
         return userDao.checkNickname(nickname);
+    }
+
+    @Override
+    public List<User> getGroupMembers(Group currentGroup) {
+        return userDao.getGroupMembers(currentGroup.getId(), currentGroup.getIdGroupHolder());
     }
 
     @Override

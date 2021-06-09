@@ -10,6 +10,7 @@ import xd.xdchat.api.entity.GroupMsgContent;
 import xd.xdchat.api.entity.Message;
 import xd.xdchat.api.entity.User;
 import xd.xdchat.service.GroupMsgContentService;
+import xd.xdchat.service.GroupService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -60,4 +61,19 @@ public class WsController {
         simpMessagingTemplate.convertAndSend("/topic/greetings",groupMsgContent);
     }
 
+    @Autowired
+    GroupService groupService;
+    /**
+     * 踢人消息接受与转发
+     * @param authentication
+     * @param message
+     */
+    @MessageMapping("/ws/kickGroup")
+    public void kickGroup(Authentication authentication, Message message){
+        groupService.kickGroup(Integer.parseInt(message.getContent()), Integer.parseInt(message.getFrom()));
+        User user= ((User) authentication.getPrincipal());
+        message.setFrom(user.getUsername());
+        message.setCreateTime(new Date());
+        simpMessagingTemplate.convertAndSendToUser(message.getTo(),"/queue/kick",message);
+    }
 }

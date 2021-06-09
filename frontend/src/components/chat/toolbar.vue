@@ -411,7 +411,7 @@ export default {
     margin: 25px 10px;
   }
   .toolBtn {
-    background-color: #2e3238;
+    background-color: rgba(46, 50, 56, 0);
     border: 0;
     margin: 5px 5px;
   }
@@ -433,7 +433,7 @@ export default {
 #moreList {
   margin: 0px;
   padding: 0px;
-  background-color: #2e3238;
+  background-color: rgba(46, 50, 56, 0.75);
   li {
     color: aliceblue;
     padding-top: 14px;
@@ -460,7 +460,7 @@ export default {
   padding: 0px;
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: #2e3238;
+  background-color: rgba(46, 50, 56, 0.75);
   border: none;
 }
 </style>

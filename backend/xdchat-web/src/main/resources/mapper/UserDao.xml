@@ -123,6 +123,13 @@
     <select id="checkNickname" resultType="java.lang.Integer">
         select count(*) from user_info where nickname=#{nickname}
     </select>
+    <select id="getGroupMembers" resultMap="UserMap">
+        select * from user_info where id in (
+          select id_user from group_contained_users where id_group = #{idGroup}
+        ) and id != #{idGroupHolder}
+        order by nickname
+    </select>
+
     <!--    按条件查询所有的用户-->
     <select id="getAllUserByPage" resultMap="UserMap">
         select * from user_info where 1=1
