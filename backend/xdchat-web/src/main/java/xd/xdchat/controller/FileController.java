@@ -27,6 +27,7 @@ public class FileController {
 
     @PostMapping("/file")
     public String uploadImage(@RequestParam MultipartFile file) throws IOException, MyException {
+        return null;
         String fileName = file.getOriginalFilename();
         String newFileName = DigestUtils.sha1Hex(file.getInputStream()) +
                 fileName.substring(fileName.lastIndexOf('.'));
