@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div style="color:white">
       用户账号状态选择：
       <el-select v-model="stateValue" placeholder="请选择">
         <el-option

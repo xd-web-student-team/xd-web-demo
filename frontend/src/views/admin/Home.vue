@@ -55,8 +55,9 @@
         <div
           class="homeWelcome"
           v-if="this.$router.currentRoute.path == '/home'"
+		      style="color: white"
         >
-          欢迎来到XDChat管理端！
+          欢迎来到 XDChat 管理端！
         </div>
         <router-view class="homeRouterView" />
       </el-main>

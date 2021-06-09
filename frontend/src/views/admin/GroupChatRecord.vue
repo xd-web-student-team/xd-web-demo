@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div>
+    <div style="color:white">
+      群聊ID：<el-input
+        v-model="groupName"
+        placeholder="输入群聊ID"
+        class="groupNameInput"
+      ></el-input>
       发送者昵称：<el-input
         v-model="nameKeyword"
         placeholder="输入发送者昵称"
@@ -21,9 +26,9 @@
       </el-date-picker>
       消息类型：
       <el-radio-group v-model="msgTypeRadio" class="topControlsBar">
-        <el-radio :label="1">文本</el-radio>
-        <el-radio :label="2">图片</el-radio>
-        <el-radio :label="3">文件</el-radio>
+        <el-radio :label="1" style="color:white">文本</el-radio>
+        <el-radio :label="2" style="color:white">图片</el-radio>
+        <el-radio :label="3" style="color:white">文件</el-radio>
       </el-radio-group>
       <el-button
         @click="initMessTableData"
@@ -59,7 +64,9 @@
         @selection-change="handleSelectionChange"
         style="width: 100%"
       >
-        <el-table-column type="selection" width="55"> </el-table-column>
+        <el-table-column type="selection" width="50"> </el-table-column>
+        <el-table-column prop="groupId" lable="群聊ID" width="100">
+        </el-table-column>
         <el-table-column prop="id" label="消息编号" width="80">
         </el-table-column>
         <el-table-column prop="fromId" label="发送者编号" width="100">
@@ -68,7 +75,7 @@
         </el-table-column>
         <el-table-column prop="createTime" label="发送时间" width="180">
         </el-table-column>
-        <el-table-column label="内容" width="750">
+        <el-table-column label="内容" width="450">
           <template slot-scope="scope">
             <div
               v-if="scope.row.messageTypeId == 1"
@@ -99,7 +106,9 @@
         </el-table-column>
       </el-table>
     </div>
-    <div style="display: flex;justify-content: space-between;margin-top: 10px">
+    <div
+      style="display: flex;justify-content: space-between;margin-top: 10px"
+    >
       <el-button
         @click="handleMultiDelete"
         :disabled="multipleSelection.length == 0 ? true : false"
@@ -135,6 +144,7 @@ export default {
       nameKeyword: "", //查询昵称关键字
       dateScope: null, //日期时间范围数组
       loading: false,
+      groupId: "", //查询群聊ID
     };
   },
   mounted() {
@@ -145,7 +155,13 @@ export default {
     initMessTableData() {
       this.loading = true;
       let url =
-        "/groupMsgContent/page?page=" + this.page + "&size=" + this.size;
+        "/groupMsgContent/page?page=" +
+        this.page +
+        "&size=" +
+        this.size;
+      if (this.groupId != "") {
+        url += "&groupid" + this.groupName;
+      }
       if (this.nameKeyword != "") {
         url += "&nickname=" + this.nameKeyword;
       }
@@ -165,6 +181,7 @@ export default {
     },
     //刷新表格
     refreshMessTableData() {
+      this.groupId = "";
       this.nameKeyword = "";
       this.dateScope = null;
       this.msgTypeRadio = -1;
@@ -195,11 +212,13 @@ export default {
       })
         .then(() => {
           //点击确定后即执行
-          this.deleteRequest("/groupMsgContent/" + data.id).then((resp) => {
-            if (resp) {
-              this.initMessTableData();
+          this.deleteRequest("/groupMsgContent/" + data.id).then(
+            (resp) => {
+              if (resp) {
+                this.initMessTableData();
+              }
             }
-          });
+          );
         })
         .catch(() => {
           //点击了取消
@@ -245,8 +264,11 @@ export default {
 </script>
 
 <style scoped>
+.groupNameInput {
+  width: 270px;
+}
 .nameInput {
-  width: 150px;
+  width: 275px;
 }
 .topControlsBar {
   margin: 0 10px;
