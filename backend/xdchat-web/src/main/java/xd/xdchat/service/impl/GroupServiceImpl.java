@@ -45,4 +45,9 @@ public class GroupServiceImpl implements GroupService {
     public void quitGroup(Group groupToQuit) {
         groupDao.quitGroup(groupToQuit.getId(), UserUtil.getCurrentUser().getId());
     }
+
+    @Override
+    public void kickGroup(Integer idGroup, Integer idUser) {
+        groupDao.quitGroup(idGroup, idUser);
+    }
 }

@@ -12,10 +12,6 @@ import xd.xdchat.api.utils.FastDFSUtil;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * @author LSK
- * @date 2021/5/30 - 16:57
- */
 @RestController
 public class FileController {
 
@@ -29,25 +25,25 @@ public class FileController {
 //    return url;
 //  }
 
-  @PostMapping("/file")
-  public String uploadImage(@RequestParam MultipartFile file) throws IOException, MyException {
+    @PostMapping("/file")
+    public String uploadImage(@RequestParam MultipartFile file) throws IOException, MyException {
+        String fileName = file.getOriginalFilename();
+        String newFileName = DigestUtils.sha1Hex(file.getInputStream()) +
+                fileName.substring(fileName.lastIndexOf('.'));
 
-    String fileName = file.getOriginalFilename();
-    String newFileName = DigestUtils.sha1Hex(file.getInputStream()) + "." + fileName.substring(fileName.lastIndexOf('.'));
+        //前端文件夹的路径加上//public//image//
+        String path = "C://Users//23509//Desktop//XDChat//xd-web-demo//frontend//public//image//";
 
+        File newFile = new File(path + newFileName);
+        try {
+            file.transferTo(newFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String url = "/image/" + newFileName;
 
-    String path = "E://image//";
-
-    File newFile = new File(path + newFileName);
-    try {
-      file.transferTo(newFile);
-    } catch (Exception e) {
-      e.printStackTrace();
+        return url;
     }
-    String url = "http://localhost:8080/image/" + newFileName;
-
-    return url;
-  }
 
 
 }

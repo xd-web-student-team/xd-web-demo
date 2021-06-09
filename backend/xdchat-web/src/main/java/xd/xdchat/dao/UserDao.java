@@ -1,5 +1,6 @@
 package xd.xdchat.dao;
 
+import xd.xdchat.api.entity.Group;
 import xd.xdchat.api.entity.User;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -89,4 +90,6 @@ public interface UserDao {
     Integer changeLockedStatus(@Param("id") Integer id, @Param("isLocked") Boolean isLocked);
 
     Integer deleteByIds(@Param("ids") Integer[] ids);
+
+    List<User> getGroupMembers(Integer idGroup, Integer idGroupHolder);
 }

@@ -22,4 +22,7 @@ public interface GroupService {
 
     //退出群聊
     void quitGroup(Group groupToQuit);
+
+    //踢出群聊
+    void kickGroup(Integer idGroup, Integer idUser);
 }

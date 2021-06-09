@@ -1,5 +1,5 @@
 import  Vue from 'vue'
-import  Vuex from 'vuex'
+import Vuex from 'vuex'
 import SockJS from '../utils/sockjs'
 import  '../utils/stomp'
 import {getRequest} from "../utils/api";
@@ -37,15 +37,13 @@ const store =  new Vuex.Store({
     },
     changeCurrentSessionGroup (state,currentSession) {
       //切换到当前用户就标识消息已读
-      // Vue.set(state.isDot,state.currentUser.username+"#"+currentSession.username,false);
+      Vue.set(state.isDot,state.currentUser.username+"#"+currentSession.id,false);
       //更新当前选中的用户
       state.currentSessionGroup = currentSession;
     },
     //修改当前聊天窗口列表
     changeCurrentList(state,currentList){
       state.currentList = currentList;
-      if (currentList = '群聊') state.isGroup = true;
-      else  state.isGroup = false;
     },
     //保存群聊消息记录
     addGroupMessage(state,msg){
@@ -152,12 +150,9 @@ const store =  new Vuex.Store({
           let receiveMsg=JSON.parse(msg.body);
           //console.log("收到消息"+receiveMsg);
           //当前点击的聊天界面不是群聊,默认为消息未读
-          // if (context.state.currentSessionGroup.id!=receiveMsg.idGroup){
-          //   Vue.set(context.state.isDot,context.state.currentUser.username+"#西电人总群",true);
-          // }
-          // else if(context.state.currentSession.username!="西电计科院交流群"){
-          //   Vue.set(context.state.isDot,context.state.currentUser.username+"#西电计科院交流群",true);
-          // }
+          if (context.state.currentSessionGroup.id!=receiveMsg.idGroup){
+            Vue.set(context.state.isDot,context.state.currentUser.username+'#'+receiveMsg.idGroup,true);
+          }
           //提交消息记录
           context.commit('addGroupMessage',receiveMsg);
         });
@@ -177,26 +172,52 @@ const store =  new Vuex.Store({
         /**
          * 订阅私人消息
          */
-        context.state.stomp.subscribe('/user/queue/chat',msg=>{
+        context.state.stomp.subscribe('/user/queue/chat', msg => {
           //接收到的消息数据
-          let receiveMsg=JSON.parse(msg.body);
+          let receiveMsg = JSON.parse(msg.body);
           //没有选中用户或选中用户不是发来消息的那一方
-          if (!context.state.currentSession||receiveMsg.from!=context.state.currentSession.username){
+          if (!context.state.currentSession || receiveMsg.from != context.state.currentSession.username) {
             Notification.info({
-              title:'【'+receiveMsg.fromNickname+'】发来一条消息',
-              message:receiveMsg.content.length<8?receiveMsg.content:receiveMsg.content.substring(0,8)+"...",
-              position:"bottom-right"
+              title: '【' + receiveMsg.fromNickname + '】发来一条消息',
+              message: receiveMsg.content.length < 8 ? receiveMsg.content : receiveMsg.content.substring(0, 8) + "...",
+              position: "bottom-right"
             });
             //默认为消息未读
-            Vue.set(context.state.isDot,context.state.currentUser.username+"#"+receiveMsg.from,true);
+            Vue.set(context.state.isDot, context.state.currentUser.username + "#" + receiveMsg.from, true);
           }
           //标识这个消息不是自己发的
-          receiveMsg.notSelf=true;
+          receiveMsg.notSelf = true;
           //获取发送方
-          receiveMsg.to=receiveMsg.from;
+          receiveMsg.to = receiveMsg.from;
           //提交消息记录
-          context.commit('addMessage',receiveMsg);
-        })
+          context.commit('addMessage', receiveMsg);
+        });
+        //订阅踢人消息
+        context.state.stomp.subscribe('/user/queue/kick', msg => {
+          //接收到的消息数据
+          let receiveMsg = JSON.parse(msg.body);
+          let theGroup = new Object();
+          theGroup.id = receiveMsg.content;
+          theGroup.groupName = receiveMsg.fromNickname;
+          theGroup.idGroupHolder = receiveMsg.messageTypeId;
+
+          if (context.state.currentList != '群聊' || context.state.currentSessionGroup.id != theGroup.id) {
+            Notification.info({
+              title: '系统消息',
+              message: "您已被踢出群聊：" + theGroup.groupName,
+              position:"top-right"
+            });
+          } else {
+            Notification.info({
+              title: '系统消息',
+              message: "您已被踢出该群聊",
+              position:"top-right"
+            });
+          }
+          //删除群聊消息
+          context.state.groups.splice(context.state.groups.indexOf(theGroup), 1);
+          Vue.delete(context.state.sessions['群聊'], theGroup.id);
+        });
       },error=>{
         Notification.info({
           title: '系统消息',
@@ -218,7 +239,7 @@ const store =  new Vuex.Store({
 store.watch(function (state) {
   return state.sessions
 },function (val) {
-  console.log('CHANGE: ', val);
+  //console.log('CHANGE: ', val);
   localStorage.setItem('chat-session', JSON.stringify(val));
 },{
   deep:true/*这个貌似是开启watch监测的判断,官方说明也比较模糊*/
