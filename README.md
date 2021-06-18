@@ -152,26 +152,36 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 #### 7.1 注册/登录界面
 ##### （1）注册
 实现用户注册功能，可以在限定要求下编辑昵称、用户名、密码并确认、用户头像（可选）
+![register](https://gitee.com/calvin11311/chatpic/raw/master/pics/register.jpg)
 ##### （2）登录
 用户通过输入正确用户名和密码进行登录
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/login.jpg)
 #### 7.2 聊天界面
 ##### （1）私聊
 用户可以和好友私发消息
 显示好友在线/离线状态
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/selfchat.jpg)
 ##### （2）群聊
 用户通过搜索群聊名称加入群聊
-加入群聊后，会显示已有消息
-可以对所有群成员接收和发送消息
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/joingroup.jpg)
+  
+  
+加入群聊后，会显示已有消息，可以对所有群成员接收和发送消息
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/groupchat.jpg)
 ##### （3）搜索
 聊天室提供的搜索框中，可以搜索到已经加入的群聊和好友
 ##### （4）群管理
 在用户自己创建的群中，可以选择将任意群成员剔除
 #### 7.3 管理员界面
 **系统切换到管理员状态，可以进行管理员权限的管理**
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/adminlogin.jpg)
 ##### （1）登录权限管理
 管理员可以看到全部在系统中注册的用户，选择是/否锁定该用户，锁定后用户无法发言
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/usermanagement.jpg)
 ##### （2）聊天记录管理  
 管理员可以查看所有用户消息记录，并且可以按关键词、时间段、用户名查找聊天记录，并对聊天记录进行删除
+![avatar](https://gitee.com/calvin11311/chatpic/raw/master/pics/messagemangement.jpg)
+
 ### 8. Web应用测试
 #### 8.1 单元测试
 **对项目中最小可测试单元进行检查**
