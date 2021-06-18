@@ -185,6 +185,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 ### 8. Web应用测试
 #### 8.1 单元测试
 **对项目中最小可测试单元进行检查**
+
 在后端主要应用Postman模拟前端请求发送并检测后端输出内容，测试相关需求组件
 - 用户登录组件
 - 用户修改信息组件
